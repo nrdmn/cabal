@@ -223,7 +223,7 @@ def install_sdist(dist_dir: Path, sdist_dir: Path, ghc: Compiler, flags: List[st
     # This should be fine for cabal-install dependencies.
     check_call([str(ghc.ghc_path), '--make', '-package-env=-', '-i', f'-odir={setup_dist_dir}', f'-hidir={setup_dist_dir}', '-o', setup, 'Setup'])
     check_call([setup, 'configure'] + configure_args)
-    check_call([setup, 'build'] + build_args)
+    check_call([setup, 'build', '--jobs=32'] + build_args)
     check_call([setup, 'install'] + build_args)
 
 def hash_file(h, f: BinaryIO) -> SHA256Hash:
